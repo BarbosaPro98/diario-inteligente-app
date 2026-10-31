@@ -1,0 +1,283 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *, [data-theme="masculino"], [data-theme="masculino"] *));
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-fg: var(--fg);
+  --color-muted: var(--muted);
+  --color-border: var(--border);
+  --color-primary: var(--primary);
+  --color-primary-fg: var(--primary-fg);
+  --color-accent: var(--accent);
+  --color-danger: var(--danger);
+  --color-success: var(--success);
+  --radius-ui: var(--radius);
+  --radius-ui-lg: calc(var(--radius) * 1.5);
+  --font-body: var(--font-selected);
+}
+
+/* ---------- Temas ---------- */
+:root,
+[data-theme="dark"] {
+  --bg: #0f1115;
+  --surface: #171a21;
+  --surface-2: #1f232c;
+  --fg: #e6e8ee;
+  --muted: #8a90a0;
+  --border: #2a2f3a;
+  --primary: #a5b4fc;
+  --primary-fg: #11131a;
+  --accent: #94a3b8;
+  --danger: #f87171;
+  --success: #4ade80;
+  --radius: 12px;
+  --border-w: 1px;
+  --bg-decor: none;
+  color-scheme: dark;
+}
+
+[data-theme="light"] {
+  --bg: #f7f7f5;
+  --surface: #ffffff;
+  --surface-2: #f0f0ed;
+  --fg: #1c1c1c;
+  --muted: #6b6b6b;
+  --border: #e4e4df;
+  --primary: #2b2b2b;
+  --primary-fg: #ffffff;
+  --accent: #8a8a85;
+  --danger: #c2410c;
+  --success: #15803d;
+  --radius: 10px;
+  --border-w: 1px;
+  --bg-decor: none;
+  color-scheme: light;
+}
+
+[data-theme="feminino"] {
+  --bg: #fbf4f7;
+  --surface: #fffafc;
+  --surface-2: #f6e8f0;
+  --fg: #3d2a3a;
+  --muted: #8c6f86;
+  --border: #ecd6e3;
+  --primary: #c0648f;
+  --primary-fg: #ffffff;
+  --accent: #a78bfa;
+  --danger: #d9465f;
+  --success: #3f9d7a;
+  --radius: 20px;
+  --border-w: 1px;
+  --bg-decor: radial-gradient(40rem 30rem at 110% -10%, #e9d5ff66, transparent 60%), radial-gradient(36rem 28rem at -10% 110%, #fbcfe866, transparent 60%);
+  color-scheme: light;
+}
+
+[data-theme="masculino"] {
+  --bg: #0d1626;
+  --surface: #132036;
+  --surface-2: #1a2a43;
+  --fg: #e2e8f0;
+  --muted: #8797ad;
+  --border: #283a55;
+  --primary: #5b8bd6;
+  --primary-fg: #ffffff;
+  --accent: #7c8796;
+  --danger: #ef6b6b;
+  --success: #52b788;
+  --radius: 2px;
+  --border-w: 1px;
+  --bg-decor: none;
+  color-scheme: dark;
+}
+
+[data-theme="infantil"] {
+  --bg: #fff8e7;
+  --surface: #ffffff;
+  --surface-2: #fff0c7;
+  --fg: #2d2a4a;
+  --muted: #6d6a8a;
+  --border: #ffd166;
+  --primary: #ff6b6b;
+  --primary-fg: #ffffff;
+  --accent: #4ecdc4;
+  --danger: #e63946;
+  --success: #2a9d8f;
+  --radius: 26px;
+  --border-w: 2px;
+  --bg-decor:
+    radial-gradient(circle at 12% 18%, #4ecdc433 0 3rem, transparent 3.1rem), radial-gradient(circle at 88% 12%, #ff6b6b2e 0 2.2rem, transparent 2.3rem),
+    radial-gradient(circle at 80% 85%, #ffd16655 0 4rem, transparent 4.1rem), radial-gradient(circle at 8% 90%, #a78bfa33 0 2.5rem, transparent 2.6rem);
+  color-scheme: light;
+}
+
+[data-theme="business"] {
+  --bg: #f3f4f6;
+  --surface: #ffffff;
+  --surface-2: #eef0f3;
+  --fg: #111827;
+  --muted: #6b7280;
+  --border: #d8dce2;
+  --primary: #1f3a5f;
+  --primary-fg: #ffffff;
+  --accent: #0f766e;
+  --danger: #b91c1c;
+  --success: #047857;
+  --radius: 6px;
+  --border-w: 1px;
+  --bg-decor: none;
+  color-scheme: light;
+}
+
+/* ---------- Tipografia ---------- */
+:root {
+  --font-selected: var(--font-inter), system-ui, sans-serif;
+}
+[data-font="inter"] {
+  --font-selected: var(--font-inter), system-ui, sans-serif;
+}
+[data-font="merriweather"] {
+  --font-selected: var(--font-merriweather), Georgia, serif;
+}
+[data-font="playfair"] {
+  --font-selected: var(--font-playfair), Georgia, serif;
+}
+[data-font="caveat"] {
+  --font-selected: var(--font-caveat), cursive;
+  font-size: 125%;
+}
+[data-font="dancing"] {
+  --font-selected: var(--font-dancing), cursive;
+  font-size: 112%;
+}
+[data-font="jetbrains"] {
+  --font-selected: var(--font-jetbrains), ui-monospace, monospace;
+  font-size: 94%;
+}
+[data-theme="business"]:not([data-font="caveat"]):not([data-font="dancing"]) {
+  font-size: 95%;
+}
+
+html,
+body {
+  background: var(--bg);
+  color: var(--fg);
+}
+
+body {
+  font-family: var(--font-selected);
+  background-image: var(--bg-decor);
+  background-attachment: fixed;
+  -webkit-tap-highlight-color: transparent;
+}
+
+* {
+  border-color: var(--border);
+}
+
+.bw {
+  border-width: var(--border-w);
+}
+
+::selection {
+  background: color-mix(in srgb, var(--primary) 30%, transparent);
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator,
+input[type="time"]::-webkit-calendar-picker-indicator {
+  opacity: 0.6;
+}
+
+/* Conteúdo markdown renderizado */
+.prose-diario h1 {
+  font-size: 1.5em;
+  font-weight: 700;
+  margin: 0.6em 0 0.3em;
+}
+.prose-diario h2 {
+  font-size: 1.25em;
+  font-weight: 700;
+  margin: 0.6em 0 0.3em;
+}
+.prose-diario h3 {
+  font-size: 1.1em;
+  font-weight: 600;
+  margin: 0.5em 0 0.2em;
+}
+.prose-diario p {
+  margin: 0.4em 0;
+  line-height: 1.7;
+}
+.prose-diario ul {
+  list-style: disc;
+  padding-left: 1.4em;
+  margin: 0.4em 0;
+}
+.prose-diario ol {
+  list-style: decimal;
+  padding-left: 1.4em;
+  margin: 0.4em 0;
+}
+.prose-diario blockquote {
+  border-left: 3px solid var(--primary);
+  padding-left: 0.8em;
+  color: var(--muted);
+  margin: 0.5em 0;
+}
+.prose-diario code {
+  background: var(--surface-2);
+  padding: 0.1em 0.35em;
+  border-radius: 4px;
+  font-size: 0.9em;
+}
+.prose-diario a {
+  color: var(--primary);
+  text-decoration: underline;
+}
+.prose-diario li.task {
+  list-style: none;
+  margin-left: -1.2em;
+}
+
+@keyframes pulse-ring {
+  0% {
+    box-shadow: 0 0 0 0 color-mix(in srgb, var(--danger) 55%, transparent);
+  }
+  100% {
+    box-shadow: 0 0 0 12px transparent;
+  }
+}
+.recording {
+  animation: pulse-ring 1.2s ease-out infinite;
+}
+
+@keyframes shake {
+  10%,
+  90% {
+    transform: translateX(-2px);
+  }
+  20%,
+  80% {
+    transform: translateX(4px);
+  }
+  30%,
+  50%,
+  70% {
+    transform: translateX(-8px);
+  }
+  40%,
+  60% {
+    transform: translateX(8px);
+  }
+}
+.shake {
+  animation: shake 0.45s;
+}
+
+@media print {
+  body {
+    background: white;
+  }
+}
