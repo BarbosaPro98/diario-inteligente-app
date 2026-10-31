@@ -14,6 +14,14 @@ npx serve out        # testar o build
 O build é estático (`output: "export"`): pode ser hospedado em Vercel, Netlify, GitHub Pages ou qualquer servidor HTTPS.
 WebAuthn, microfone e service worker exigem HTTPS (ou `localhost`).
 
+## Publicar na Vercel
+
+1. Acesse https://vercel.com/new e importe o repositório `BarbosaPro98/diario-inteligente-app`.
+2. Mantenha as opções detectadas (Next.js) e clique em **Deploy**.
+3. Cada merge na `main` publica uma nova versão automaticamente.
+
+O `vercel.json` aplica cabeçalhos de segurança (CSP restrita ao próprio domínio, sem iframes, HSTS) e libera microfone e WebAuthn só para o próprio site.
+
 ## Funcionalidades
 
 - **Tranca master**: PIN de 4 a 6 dígitos ou senha; espera progressiva após 5 erros; auto-lock (1/5/15/30 min) e bloqueio ao minimizar.
