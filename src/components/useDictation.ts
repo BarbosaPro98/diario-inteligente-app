@@ -48,16 +48,30 @@ export function useDictation(onFinal: (text: string) => void, onError?: (msg: st
     rec.lang = "pt-BR";
     rec.continuous = true;
     rec.interimResults = true;
+    // O Chrome do Android manda cada resultado final com TODO o texto da sessão até ali
+    // ("preciso", "preciso realizar", "preciso realizar uma"...), às vezes repetido.
+    // Guardamos o último final da sessão e só acrescentamos o trecho novo.
+    let committed = "";
     rec.onresult = (e) => {
       let live = "";
       for (let i = e.resultIndex; i < e.results.length; i++) {
         const r = e.results[i];
-        const t = r[0].transcript;
-        if (r.isFinal) {
-          cb.current(t.trim());
-          setSession((s) => (s ? s + " " : "") + t.trim());
-        } else live += t;
+        const t = r[0].transcript.trim();
+        if (!r.isFinal) {
+          live += " " + t;
+          continue;
+        }
+        if (!t) continue;
+        const delta = committed && t.toLowerCase().startsWith(committed.toLowerCase()) ? t.slice(committed.length).trim() : t;
+        committed = t;
+        if (delta) {
+          cb.current(delta);
+          setSession((s) => (s ? s + " " : "") + delta);
+        }
       }
+      live = live.trim();
+      // No Android o texto parcial também vem acumulado: mostra só o que ainda não foi gravado.
+      if (committed && live.toLowerCase().startsWith(committed.toLowerCase())) live = live.slice(committed.length).trim();
       setInterim(live);
     };
     rec.onerror = (e) => {
@@ -69,6 +83,7 @@ export function useDictation(onFinal: (text: string) => void, onError?: (msg: st
       setInterim("");
       // O navegador encerra sozinho após silêncio; reinicia enquanto o usuário quiser gravar.
       if (wantRef.current) {
+        committed = "";
         try {
           rec.start();
         } catch {
